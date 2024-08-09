@@ -1,21 +1,22 @@
-Wed Jul 31 16:55:41 2024
-Linux-6.9.12-lqx1-1-lqx-x86_64-with-glibc2.39
-Ren'Py 8.0.0.22062402
+Fri Aug  9 11:57:00 2024
+Linux-6.10.3-lqx1-1-lqx-x86_64-with-glibc2.2.5
+Ren'Py 7.5.0.22062402
  
 
-Bootstrap to the start of init.init took 0.10s
+Bootstrap to the start of init.init took 0.13s
 Early init took 0.00s
-Loader init took 0.02s
-Loading error handling took 0.09s
-Loading script took 0.92s
-Loading save slot metadata. took 0.01s
+Loader init took 0.01s
+Loading error handling took 0.03s
+Loading script took 0.85s
+Loading save slot metadata. took 0.00s
 Loading persistent took 0.00s
-Faled to initialize steam: OSError('/home/newgreen/Belgeler/renpy-8.0.0-sdk/lib/py3-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory')
-Running init code took 0.27s
-Loading analysis data took 0.06s
-Analyze and compile ATL took 0.05s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.07s
 Index archives took 0.00s
-Dump and make backups. took 0.06s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.10s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.06s
@@ -24,107 +25,1102 @@ Creating interface object took 0.00s
 Cleaning stores took 0.00s
 Init translation took 0.08s
 Build styles took 0.01s
-Load screen analysis took 0.06s
-Analyze screens took 0.00s
-Save screen analysis took 0.00s
-Prepare screens took 0.08s
+Load screen analysis took 0.00s
+Analyze screens took 0.03s
+Save screen analysis took 0.05s
+Prepare screens took 0.09s
 Save pyanalysis. took 0.00s
-Save bytecode. took 0.09s
+Save bytecode. took 0.06s
 Running _start took 0.00s
 Performance test:
-Interface start took 0.36s
+Interface start took 0.23s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1366, 768)
 swap interval: 1 frames
 Windowed mode.
-Vendor: "b'Intel'"
-Renderer: b'Mesa Intel(R) HD Graphics 520 (SKL GT2)'
-Version: b'4.6 (Compatibility Profile) Mesa 24.1.3-manjaro1.1'
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
 Display Info: None
 Screen sizes: virtual=(1280, 720) physical=(1184, 666) drawable=(1184, 666)
 Maximum texture size: 4096x4096
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s
-Screen sizes: virtual=(1280, 720) physical=(1366, 745) drawable=(1366, 745)
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
 Maximum texture size: 4096x4096
+
+Full traceback:
+  File "game/sayori.rpy", line 22, in script
+    s "Senin ismin [usr]."
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 901, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/exports.py", line 1373, in say
+    who(what, *args, **kwargs)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/character.py", line 1240, in __call__
+    what = self.prefix_suffix("what", self.what_prefix, what, self.what_suffix)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/character.py", line 1159, in prefix_suffix
+    return (sub(prefix) + sub(body) + sub(suffix))
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/character.py", line 1139, in sub
+    return renpy.substitutions.substitute(s, scope=scope, force=force, translate=translate)[0]
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/substitutions.py", line 278, in substitute
+    s = formatter.vformat(s, (), kwargs) # type: ignore
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 563, in vformat
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 585, in _vformat
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/substitutions.py", line 168, in get_field
+    obj, arg_used = super(Formatter, self).get_field(field_name, args, kwargs)
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 646, in get_field
+  File "/home/tom/ab/renpy-build/tmp/install.linux-x86_64/lib/python2.7/string.py", line 605, in get_value
+KeyError: u'usr'
+
+While running game code:
+  File "game/sayori.rpy", line 22, in script
+    s "Senin ismin [usr]."
+KeyError: u'usr'
+
+Full traceback:
+  File "game/sayori.rpy", line 25, in script
+    mc_usr "Nasıl bildin peki?"
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 861, in execute
+    who = eval_who(self.who, self.who_fast)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 754, in eval_who
+    raise Exception("Sayer '%s' is not defined." % who)
+Exception: Sayer 'mc_usr' is not defined.
+
+While running game code:
+  File "game/sayori.rpy", line 25, in script
+    mc_usr "Nasıl bildin peki?"
+Exception: Sayer 'mc_usr' is not defined.
 Resetting cache.
-Bootstrap to the start of init.init took 69.94s
+Bootstrap to the start of init.init took 69.60s
+Early init took 0.01s
+Loader init took 0.03s
+Loading error handling took 0.03s
+Loading script took 2.03s
+Loading save slot metadata. took 0.00s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.10s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.08s
+Index archives took 0.00s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.09s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.10s
+Build styles took 0.00s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.06s
+Prepare screens took 0.09s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.04s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.21s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "game/sayori.rpy", line 25, in script
+    mc_usr "Nasıl bildin peki?"
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 901, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/exports.py", line 1373, in say
+    who(what, *args, **kwargs)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/character.py", line 1235, in __call__
+    who = renpy.python.py_eval(who)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1080, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1073, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "<none>", line 1, in <module>
+NameError: name 'usr' is not defined
+
+While running game code:
+  File "game/sayori.rpy", line 25, in script
+    mc_usr "Nasıl bildin peki?"
+NameError: name 'usr' is not defined
+Resetting cache.
+Bootstrap to the start of init.init took 134.23s
 Early init took 0.00s
 Loader init took 0.01s
-Loading error handling took 0.05s
-Loading script took 0.30s
-Loading save slot metadata. took 0.01s
+Loading error handling took 0.01s
+Loading script took 1.86s
+Loading save slot metadata. took 0.00s
 Loading persistent took 0.00s
-Faled to initialize steam: OSError('/home/newgreen/Belgeler/renpy-8.0.0-sdk/lib/py3-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory')
-Running init code took 0.08s
-Loading analysis data took 0.03s
-Analyze and compile ATL took 0.05s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.13s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.07s
 Index archives took 0.00s
-Backing up script files to '/home/newgreen/.renpy/backups/DDLC After Story':
-Dump and make backups. took 0.05s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.11s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc. took 0.08s
 DPI scale factor: 1.000000
 Creating interface object took 0.00s
 Cleaning stores took 0.00s
-Init translation took 0.07s
-Build styles took 0.00s
+Init translation took 0.10s
+Build styles took 0.02s
 Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.03s
-Prepare screens took 0.07s
+Analyze screens took 0.03s
+Save screen analysis took 0.05s
+Prepare screens took 0.10s
 Save pyanalysis. took 0.00s
-Save bytecode. took 0.05s
+Save bytecode. took 0.03s
 Running _start took 0.00s
 Performance test:
-Interface start took 0.15s
+Interface start took 0.23s
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1366, 768)
 swap interval: 1 frames
 Windowed mode.
-Vendor: "b'Intel'"
-Renderer: b'Mesa Intel(R) HD Graphics 520 (SKL GT2)'
-Version: b'4.6 (Compatibility Profile) Mesa 24.1.3-manjaro1.1'
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
 Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1366, 745) drawable=(1366, 745)
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
 Maximum texture size: 4096x4096
 Resetting cache.
-Bootstrap to the start of init.init took 106.81s
+Bootstrap to the start of init.init took 273.59s
 Early init took 0.00s
-Loader init took 0.01s
-Loading error handling took 0.03s
-Loading script took 0.27s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.40s
 Loading save slot metadata. took 0.00s
 Loading persistent took 0.00s
-Faled to initialize steam: OSError('/home/newgreen/Belgeler/renpy-8.0.0-sdk/lib/py3-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory')
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
 Running init code took 0.09s
 Loading analysis data took 0.04s
 Analyze and compile ATL took 0.06s
 Index archives took 0.00s
-Backing up script files to '/home/newgreen/.renpy/backups/DDLC After Story':
-Dump and make backups. took 0.07s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.09s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
-Initial gc. took 0.08s
+Initial gc. took 0.09s
 DPI scale factor: 1.000000
 Creating interface object took 0.00s
 Cleaning stores took 0.00s
 Init translation took 0.09s
-Build styles took 0.02s
+Build styles took 0.01s
 Load screen analysis took 0.00s
 Analyze screens took 0.03s
-Save screen analysis took 0.03s
+Save screen analysis took 0.05s
+Prepare screens took 0.10s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.03s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.20s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
+Maximum texture size: 4096x4096
+Cleaning stores took 0.00s
+Init translation took 0.00s
+Build styles took 0.01s
+Load screen analysis took 0.04s
+Analyze screens took 0.00s
+Prepare screens took 0.00s
+Running _start took 0.00s
+
+Full traceback:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 1111, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1049, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3376, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3905, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 2604, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 495, in renpy.display.render.render_screen
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/transition.py", line 370, in render
+    return render(self.new_widget, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/screen.py", line 704, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 505, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 308, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/transform.py", line 747, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 627, in render
+    return cache.get(self, render=True)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 295, in get
+    surf = image.load()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 723, in load
+    raise e
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+
+While loading <renpy.display.im.Image object (u'\u2026CModTemplateLogo.png') at 0x7e0e4d453490>:
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+Resetting cache.
+Bootstrap to the start of init.init took 421.24s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.02s
+game/screens.rpy:474: SyntaxWarning: name 'player' is used prior to global declaration
+  global player
+Loading script took 0.70s
+Loading save slot metadata. took 0.00s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.11s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.09s
+Index archives took 0.00s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.10s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.17s
+Build styles took 0.02s
+Load screen analysis took 0.00s
+Analyze screens took 0.05s
+Save screen analysis took 0.07s
+Prepare screens took 0.14s
+Save pyanalysis. took 0.10s
+Save bytecode. took 0.03s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.21s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 1111, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1049, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3376, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3905, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 2604, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 495, in renpy.display.render.render_screen
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/screen.py", line 704, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 505, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 308, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/transform.py", line 747, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 627, in render
+    return cache.get(self, render=True)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 295, in get
+    surf = image.load()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 723, in load
+    raise e
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+
+While loading <renpy.display.im.Image object (u'\u2026CModTemplateLogo.png') at 0x7e0e4e3db650>:
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+Resetting cache.
+Bootstrap to the start of init.init took 428.25s
+Early init took 0.01s
+Loader init took 0.02s
+Loading error handling took 0.03s
+Loading script took 0.48s
+Loading save slot metadata. took 0.00s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.11s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.10s
+Index archives took 0.00s
+Dump and make backups. took 0.11s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.12s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.14s
+Build styles took 0.01s
+Load screen analysis took 0.09s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.19s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.23s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "renpy/common/00start.rpy", line 215, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 508, in script
+    python hide:
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 1111, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1049, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00keymap.rpy", line 508, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 518, in _execute_python_hide
+    renpy.load("_reload-2")
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/loadsave.py", line 769, in load
+    log.unfreeze(roots, label="_after_load")
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/rollback.py", line 1078, in unfreeze
+    self.rollback(0, force=True, label=label, greedy=greedy, on_load=True)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/rollback.py", line 889, in rollback
+    self.load_failed()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/rollback.py", line 807, in load_failed
+    raise Exception("Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?")
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+While running game code:
+  File "renpy/common/00start.rpy", line 215, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 508, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 508, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 518, in _execute_python_hide
+    renpy.load("_reload-2")
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+Full traceback:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 1111, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1049, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3376, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3905, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 2604, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 495, in renpy.display.render.render_screen
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/screen.py", line 704, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 505, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 308, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/transform.py", line 747, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 627, in render
+    return cache.get(self, render=True)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 295, in get
+    surf = image.load()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 723, in load
+    raise e
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+
+While loading <renpy.display.im.Image object (u'\u2026CModTemplateLogo.png') at 0x7e0e3fdec990>:
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+Resetting cache.
+Bootstrap to the start of init.init took 435.86s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.02s
+Loading script took 0.29s
+Loading save slot metadata. took 0.00s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.11s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.06s
+Index archives took 0.00s
+Dump and make backups. took 0.11s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.09s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.10s
+Build styles took 0.01s
+Load screen analysis took 0.03s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.10s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.23s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "renpy/common/00start.rpy", line 215, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 508, in script
+    python hide:
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 1111, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1049, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00keymap.rpy", line 508, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 518, in _execute_python_hide
+    renpy.load("_reload-2")
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/loadsave.py", line 769, in load
+    log.unfreeze(roots, label="_after_load")
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/rollback.py", line 1078, in unfreeze
+    self.rollback(0, force=True, label=label, greedy=greedy, on_load=True)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/rollback.py", line 889, in rollback
+    self.load_failed()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/rollback.py", line 807, in load_failed
+    raise Exception("Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?")
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+While running game code:
+  File "renpy/common/00start.rpy", line 215, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 508, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 508, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 518, in _execute_python_hide
+    renpy.load("_reload-2")
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+Full traceback:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 1111, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1049, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3376, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3905, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 2604, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 495, in renpy.display.render.render_screen
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/screen.py", line 704, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 505, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 308, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/transform.py", line 747, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 627, in render
+    return cache.get(self, render=True)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 295, in get
+    surf = image.load()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 723, in load
+    raise e
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+
+While loading <renpy.display.im.Image object (u'\u2026CModTemplateLogo.png') at 0x7e0e50913390>:
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+Resetting cache.
+Bootstrap to the start of init.init took 441.48s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.01s
+Loading script took 0.27s
+Loading save slot metadata. took 0.00s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.09s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.09s
+Index archives took 0.00s
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.09s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.01s
+Load screen analysis took 0.03s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
+Prepare screens took 0.11s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.23s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
+Maximum texture size: 4096x4096
+
+Full traceback:
+  File "renpy/common/00start.rpy", line 215, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 508, in script
+    python hide:
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 1111, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1049, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/00keymap.rpy", line 508, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 518, in _execute_python_hide
+    renpy.load("_reload-2")
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/loadsave.py", line 769, in load
+    log.unfreeze(roots, label="_after_load")
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/rollback.py", line 1078, in unfreeze
+    self.rollback(0, force=True, label=label, greedy=greedy, on_load=True)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/rollback.py", line 889, in rollback
+    self.load_failed()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/rollback.py", line 807, in load_failed
+    raise Exception("Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?")
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+While running game code:
+  File "renpy/common/00start.rpy", line 215, in script call
+    call _load_reload_game from _call__load_reload_game_1
+  File "renpy/common/00keymap.rpy", line 508, in script
+    python hide:
+  File "renpy/common/00keymap.rpy", line 508, in <module>
+    python hide:
+  File "renpy/common/00keymap.rpy", line 518, in _execute_python_hide
+    renpy.load("_reload-2")
+Exception: Couldn't find a place to stop rolling back. Perhaps the script changed in an incompatible way?
+
+Full traceback:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in script
+    python hide:
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ast.py", line 1111, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/python.py", line 1049, in py_exec_bytecode
+    exec(bytecode, globals, locals)
+  File "renpy/common/_layout/screen_main_menu.rpym", line 28, in <module>
+    python hide:
+  File "renpy/common/_layout/screen_main_menu.rpym", line 35, in _execute_python_hide
+    ui.interact()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/ui.py", line 299, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3376, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs) # type: ignore
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 3905, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/core.py", line 2604, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 495, in renpy.display.render.render_screen
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/screen.py", line 704, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/layout.py", line 884, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 505, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/image.py", line 308, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/transform.py", line 747, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 266, in renpy.display.render.render
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 627, in render
+    return cache.get(self, render=True)
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 295, in get
+    surf = image.load()
+  File "/home/newgreen/İndirilenler/renpy-7.5.0-sdk/renpy/display/im.py", line 723, in load
+    raise e
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+
+While loading <renpy.display.im.Image object (u'\u2026CModTemplateLogo.png') at 0x7e0e4e3a2b10>:
+IOError: Couldn't find file 'mod_assets/DDLCModTemplateLogo.png'.
+Resetting cache.
+Bootstrap to the start of init.init took 534.93s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.49s
+Loading save slot metadata. took 0.01s
+Loading persistent took 0.01s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.13s
+Loading analysis data took 0.08s
+Analyze and compile ATL took 0.10s
+Index archives took 0.00s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.12s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.13s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.04s
+Save screen analysis took 0.06s
+Prepare screens took 0.24s
+Save pyanalysis. took 0.14s
+Save bytecode. took 0.03s
+Running _start took 0.01s
+Performance test:
+Interface start took 0.27s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 610.32s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.02s
+Loading script took 0.38s
+Loading save slot metadata. took 0.00s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.12s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.06s
+Index archives took 0.00s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.10s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.10s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.03s
+Save screen analysis took 0.06s
+Prepare screens took 0.11s
+Save pyanalysis. took 0.13s
+Save bytecode. took 0.03s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.21s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1184, 666) drawable=(1184, 666)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 633.62s
+Early init took 0.00s
+Loader init took 0.02s
+Loading error handling took 0.03s
+Loading script took 0.61s
+Loading save slot metadata. took 0.00s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.09s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.07s
+Index archives took 0.00s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.09s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.10s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.10s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.06s
+Prepare screens took 0.10s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.03s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.20s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1184, 666) drawable=(1184, 666)
+Maximum texture size: 4096x4096
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 641.75s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.02s
+Loading script took 0.27s
+Loading save slot metadata. took 0.00s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.09s
+Loading analysis data took 0.04s
+Analyze and compile ATL took 0.07s
+Index archives took 0.00s
+Dump and make backups. took 0.08s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.09s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.09s
+Build styles took 0.01s
+Load screen analysis took 0.03s
+Analyze screens took 0.00s
+Save screen analysis took 0.00s
 Prepare screens took 0.09s
 Save pyanalysis. took 0.00s
 Save bytecode. took 0.00s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.21s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 690.13s
+Early init took 0.00s
+Loader init took 0.01s
+Loading error handling took 0.02s
+Loading script took 0.49s
+Loading save slot metadata. took 0.01s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.12s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.06s
+Index archives took 0.00s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.11s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.10s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.10s
+Build styles took 0.02s
+Load screen analysis took 0.00s
+Analyze screens took 0.05s
+Save screen analysis took 0.06s
+Prepare screens took 0.09s
+Save pyanalysis. took 0.13s
+Save bytecode. took 0.03s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.27s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1184, 666) drawable=(1184, 666)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 840.74s
+Early init took 0.01s
+Loader init took 0.02s
+Loading error handling took 0.02s
+Loading script took 0.50s
+Loading save slot metadata. took 0.01s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.14s
+Loading analysis data took 0.08s
+Analyze and compile ATL took 0.07s
+Index archives took 0.00s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.10s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.11s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.09s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.02s
+Save screen analysis took 0.05s
+Prepare screens took 0.10s
+Save pyanalysis. took 0.00s
+Save bytecode. took 0.03s
+Running _start took 0.00s
+Performance test:
+Interface start took 0.27s
+
+Initializing gl2 renderer:
+primary display bounds: (0, 0, 1366, 768)
+swap interval: 1 frames
+Windowed mode.
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
+Display Info: None
+Screen sizes: virtual=(1280, 720) physical=(1184, 666) drawable=(1184, 666)
+Maximum texture size: 4096x4096
+Resetting cache.
+Bootstrap to the start of init.init took 889.26s
+Early init took 0.00s
+Loader init took 0.03s
+Loading error handling took 0.02s
+Loading script took 0.40s
+Loading save slot metadata. took 0.01s
+Loading persistent took 0.00s
+Faled to initialize steam: OSError('/home/newgreen/\xc4\xb0ndirilenler/renpy-7.5.0-sdk/lib/py2-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory',)
+Running init code took 0.13s
+Loading analysis data took 0.05s
+Analyze and compile ATL took 0.08s
+Index archives took 0.00s
+Backing up script files to '/home/newgreen/.renpy/backups/DDLC Yeniden Ba\xc5\x9flang\xc4\xb1\xc3\xa7':
+Dump and make backups. took 0.11s
+Cleaning cache took 0.00s
+Making clean stores took 0.00s
+Initial gc. took 0.09s
+DPI scale factor: 1.000000
+Creating interface object took 0.00s
+Cleaning stores took 0.00s
+Init translation took 0.11s
+Build styles took 0.01s
+Load screen analysis took 0.00s
+Analyze screens took 0.03s
+Save screen analysis took 0.06s
+Prepare screens took 0.15s
+Save pyanalysis. took 0.09s
+Save bytecode. took 0.03s
 Running _start took 0.00s
 Performance test:
 Interface start took 0.19s
@@ -133,73 +1129,11 @@ Initializing gl2 renderer:
 primary display bounds: (0, 0, 1366, 768)
 swap interval: 1 frames
 Windowed mode.
-Vendor: "b'Intel'"
-Renderer: b'Mesa Intel(R) HD Graphics 520 (SKL GT2)'
-Version: b'4.6 (Compatibility Profile) Mesa 24.1.3-manjaro1.1'
+Vendor: 'AMD'
+Renderer: 'HAINAN (radeonsi, , LLVM 18.1.8, DRM 2.50, 6.10.3-lqx1-1-lqx)'
+Version: '4.5 (Compatibility Profile) Mesa 24.1.5-arch1.1'
 Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1366, 745) drawable=(1366, 745)
+Screen sizes: virtual=(1280, 720) physical=(1184, 666) drawable=(1184, 666)
 Maximum texture size: 4096x4096
-Resetting cache.
-Bootstrap to the start of init.init took 134.07s
-Early init took 0.00s
-Loader init took 0.01s
-Loading error handling took 0.02s
-Loading script took 0.32s
-Loading save slot metadata. took 0.00s
-Loading persistent took 0.00s
-Faled to initialize steam: OSError('/home/newgreen/Belgeler/renpy-8.0.0-sdk/lib/py3-linux-x86_64/libsteam_api.so: cannot open shared object file: No such file or directory')
-Running init code took 0.08s
-Loading analysis data took 0.03s
-Analyze and compile ATL took 0.05s
-Index archives took 0.00s
-Backing up script files to '/home/newgreen/.renpy/backups/DDLC After Story':
-Dump and make backups. took 0.08s
-Cleaning cache took 0.00s
-Making clean stores took 0.00s
-Initial gc. took 0.08s
-DPI scale factor: 1.000000
-Creating interface object took 0.00s
-Cleaning stores took 0.00s
-Init translation took 0.07s
-Build styles took 0.00s
-Load screen analysis took 0.00s
-Analyze screens took 0.02s
-Save screen analysis took 0.03s
-Prepare screens took 0.08s
-Save pyanalysis. took 0.00s
-Save bytecode. took 0.00s
-Running _start took 0.00s
-Performance test:
-Interface start took 0.15s
-
-Initializing gl2 renderer:
-primary display bounds: (0, 0, 1366, 768)
-swap interval: 1 frames
-Windowed mode.
-Vendor: "b'Intel'"
-Renderer: b'Mesa Intel(R) HD Graphics 520 (SKL GT2)'
-Version: b'4.6 (Compatibility Profile) Mesa 24.1.3-manjaro1.1'
-Display Info: None
-Screen sizes: virtual=(1280, 720) physical=(1366, 745) drawable=(1366, 745)
+Screen sizes: virtual=(1280, 720) physical=(1366, 716) drawable=(1366, 716)
 Maximum texture size: 4096x4096
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.04s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s
-Cleaning stores took 0.00s
-Init translation took 0.00s
-Build styles took 0.00s
-Load screen analysis took 0.03s
-Analyze screens took 0.00s
-Prepare screens took 0.00s
-Running _start took 0.00s

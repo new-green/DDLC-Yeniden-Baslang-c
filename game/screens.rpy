@@ -1,4 +1,3 @@
-
 ## screens.rpy
 
 # This file declares all the screens and styles in DDLC.
@@ -10,6 +9,11 @@ init offset = -1
 
 # Thanks RenpyTom! Borrowed from the Ren'Py Launcher
 init python:
+    # Ren'Py 6 doesn't have translate_string defined by default so
+    # import it and set for Ren'Py 7 code workings.
+    from renpy.translation import translate_string
+    renpy.translate_string = translate_string
+
     def scan_translations():
 
         languages = renpy.known_languages()
@@ -18,11 +22,17 @@ init python:
             return None
 
         rv = [(i, renpy.translate_string("{#language name and font}", i)) for i in languages ]
-        rv.sort(key=lambda a : renpy.filter_text_tags(a[1], allow=[]).lower())
+        
+        # We will use a imported Ren'Py 7 function for Ren'Py 6
+        if renpy.version_tuple == (6, 99, 12, 4, 2187):
+            rv.sort(key=lambda a : filter_text_tags(a[1], allow=[]).lower())
+        else:
+            rv.sort(key=lambda a : renpy.filter_text_tags(a[1], allow=[]).lower())
 
         rv.insert(0, (None, "English"))
 
-        bound = math.ceil(len(rv)/2.)
+        # Cause Ren'Py 6 sets this as float, set it as int
+        bound = int(math.ceil(len(rv)/2.))
 
         return (rv[:bound], rv[bound:2*bound])
 
@@ -488,6 +498,7 @@ init python:
         if launchGame:
             renpy.jump_out_of_context("start")
 
+
 screen navigation():
 
     vbox:
@@ -501,33 +512,27 @@ screen navigation():
         if not persistent.autoload or not main_menu:
 
             if main_menu:
-                textbutton _("Yeni Oyun") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Lütfen adınızı giriniz", ok_action=Function(FinishEnterName)))
+                textbutton _("Yeni Oyun") action If(persistent.playername, true=Start(), false=Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName)))
+
             else:
+
                 textbutton _("Geçmiş") action [ShowMenu("history"), SensitiveIf(renpy.get_screen("history") == None)]
 
-                textbutton _("Oyunu Kayıt et") action [ShowMenu("save"), SensitiveIf(renpy.get_screen("save") == None)]
+                textbutton _("Oyun kayıt") action [ShowMenu("save"), SensitiveIf(renpy.get_screen("save") == None)]
 
             textbutton _("Oyunu Yükle") action [ShowMenu("load"), SensitiveIf(renpy.get_screen("load") == None)]
 
             if not main_menu:
-                if persistent.playthrough != 3:
-                    textbutton _("Ana menü") action MainMenu()
-                else:
-                    textbutton _("Ana menü") action NullAction()
+                textbutton _("Ana Menü") action NullAction()
 
             textbutton _("Ayarlar") action [ShowMenu("preferences"), SensitiveIf(renpy.get_screen("preferences") == None)]
-
-            if not enable_extras_menu:
-                textbutton _("Credits") action ShowMenu("about")
+            textbutton _("Credits") action ShowMenu("about")
 
             if renpy.variant("pc"):
-
-                textbutton _("Yardım") action Help("README.html")
-                textbutton _("Video") action Help("gametest.mp4") 
-                ## The quit button is banned on iOS and unnecessary on Android.
                 textbutton _("Çık") action Quit(confirm=not main_menu)
         else:
             timer 1.75 action Start("autoload_yurikill")
+
 
 style navigation_button is gui_button
 style navigation_button_text is gui_button_text
@@ -561,46 +566,43 @@ screen main_menu():
 
     style_prefix "main_menu"
 
-    if persistent.ghost_menu:
-        add "white"
+    add "white"
+    add "menu_bg"
+    frame
+    use navigation
+
+    add "menu_particles"
+    add "menu_particles"
+    add "menu_particles"
+    add "menu_logo"
+
+    if persistent.sayori_value == True:
+        add "menu_art_s_ghost"
+        add "menu_art_s"
+    elif persistent.natsuki_value == True:
+        add "menu_art_n_ghost"
+        add "menu_art_n"
+
+    elif persistent.yuri_value == True:
+        add "menu_art_y_ghost"
+        add "menu_art_y"
+
+    elif persistent.monika_value == True:
+        add "menu_art_m_ghost"
+        add "menu_art_m"
+    
+    else:
         add "menu_art_y_ghost"
         add "menu_art_n_ghost"
-    else:
-        add "menu_bg"
         add "menu_art_y"
         add "menu_art_n"
-        frame
-
-        ## The use statement includes another screen inside this one. The actual
-        ## contents of the main menu are in the navigation screen.
-        use navigation
-
-    if not persistent.ghost_menu:
-        add "menu_particles"
-        add "menu_particles"
-        add "menu_particles"
-        add "menu_logo"
-    if persistent.ghost_menu:
-        add "menu_art_s_ghost"
         add "menu_art_m_ghost"
-    else:
-        if persistent.playthrough == 1 or persistent.playthrough == 2:
-            add "menu_art_s_glitch"
-        else:
-            add "menu_art_s"
-        add "menu_particles"
-        if persistent.playthrough != 4:
-            add "menu_art_m"
-        add "menu_fade"
+        add "menu_art_m"
+        add "menu_art_s_glitch"
 
-    if gui.show_name:
+    add "menu_fade"
 
-        vbox:
-            text "[config.name!t]":
-                style "main_menu_title"
 
-            text "[config.version]":
-                style "main_menu_version"
 
     key "K_ESCAPE" action Quit(confirm=False)
 
@@ -710,7 +712,7 @@ screen game_menu(title, scroll=None):
     if not main_menu and persistent.playthrough == 2 and not persistent.menu_bg_m and renpy.random.randint(0, 49) == 0:
         on "show" action Show("game_menu_m")
 
-    textbutton _("Return"):
+    textbutton _("Geri Dön"):
         style "return_button"
 
         action Return()
@@ -801,7 +803,7 @@ screen about():
                 yfit True
 
             vbox:
-                add Transform("mod_assets/DDLCModTemplateLogo.png", size=(200,200)) xalign .5
+                add Transform("mod_assets/logo.png", size=(200,200)) xalign .5
 
                 null height 5
                 
@@ -815,7 +817,7 @@ screen about():
                 ## Do not touch/remove these unless the © or – symbol isn't available in your font.
                 ## You may add things above or below it.
                 ## If you are not going with a splashscreen option, this first line MUST stay in the mod.
-                text "Made with bronya_rand's {a=https://github.com/GanstaKingofSA/DDLCModTemplate2.0}DDLC Mod Template 2.0{/a}\nCopyright © 2019-" + str(datetime.date.today().year) + " Azariel Del Carmen (bronya_rand). All rights reserved.\n"
+                text "Made with bronya_rands's {a=https://github.com/GanstaKingofSA/DDLCModTemplate2.0}DDLC Mod Template 2.0{/a}.\nCopyright © 2019-" + str(datetime.date.today().year) + " Azariel Del Carmen (bronya_rand). All rights reserved.\n"
                 text "Doki Doki Literature Club. Copyright © 2017 Team Salvato. All rights reserved.\n"
                 text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n[renpy.license!t]")
 
@@ -1022,99 +1024,6 @@ style viewframe_text is confirm_prompt_text:
     size 20
     yalign 0.7
 
-## Windowed Resolutions
-## Windowed Resolutions allow players to scale the game to different resolutions.
-## Uncomment the below #'s to enable this.
-# screen confirm_res(old_res):
-    
-#     ## Ensure other screens do not get input while this screen is displayed.
-#     modal True
-
-#     zorder 200
-
-#     style_prefix "confirm"
-
-#     add "gui/overlay/confirm.png"
-
-#     frame:
-
-#         vbox:
-#             xalign .5
-#             yalign .5
-#             spacing 30
-
-#             ## This if-else statement either shows a normal textbox or
-#             ## glitched textbox if you are in Sayori's Death Scene and are
-#             ## quitting the game.
-#             # if in_sayori_kill and message == layout.QUIT:
-#             #     add "confirm_glitch" xalign 0.5
-#             # else:
-#             label _("Would you like to keep these changes?"):
-#                 style "confirm_prompt"
-#                 xalign 0.5
-
-#             add DynamicDisplayable(res_text_timer) xalign 0.5
-
-#             hbox:
-#                 xalign 0.5
-#                 spacing 100
-
-#                 ## This if-else statement disables quitting from the quit box
-#                 ## if you are in Sayori's Death Scene, else normal box.
-#                 # if in_sayori_kill and message == layout.QUIT:
-#                 #     textbutton _("Yes") action NullAction()
-#                 #     textbutton _("No") action Hide("confirm")
-#                 # else:
-#                 textbutton _("Yes") action Hide("confirm_res")
-#                 textbutton _("No") action [Function(renpy.set_physical_size, old_res), Hide("confirm_res")]
-    
-#     timer 5.0 action [Function(renpy.set_physical_size, old_res), Hide("confirm_res")]
-
-# init python:
-#     def res_text_timer(st, at):
-#         if st <= 5.0:
-#             time_left = str(round(5.0 - st))
-#             return Text(time_left, style="confirm_prompt"), 0.1
-#         else: return Text("0", style="confirm_prompt"), 0.0
-
-#     def set_physical_resolution(res):
-#         old_res = renpy.get_physical_size()
-#         renpy.set_physical_size(res)
-#         renpy.show_screen("confirm_res", old_res=old_res)
-
-# screen display_options():
-
-#     style_prefix "viewframe"
-
-#     modal True
-
-#     zorder 150
-
-#     use viewframe_options(_("Display Resolutions")):
-
-#         default scale = renpy.get_physical_size()
-
-#         vbox:
-#             xmaximum 500
-#             ysize 120
-#             viewport:
-#                 style_prefix "radio"
-#                 scrollbars "vertical"
-#                 mousewheel True
-#                 draggable True
-#                 has vbox
-
-#                 textbutton "1280x720" action SetScreenVariable("scale", (1280, 720))
-#                 textbutton "1600x900" action SetScreenVariable("scale", (1600, 900))
-
-#         null height 10
-
-#         hbox:
-#             xalign 0.5
-#             spacing 100
-
-#             textbutton _("Reset") action [Hide("display_options"), Function(renpy.reset_physical_size)]
-#             textbutton _("Set") action [Hide("display_options"), Function(set_physical_resolution, scale)]
 
 screen ddlc_preferences():
     hbox:
@@ -1219,6 +1128,21 @@ screen ddlc_preferences():
                 textbutton _("Mute All"):
                     action Preference("all mute", "toggle")
                     style "mute_all_button"
+        
+        vbox:
+            style_prefix "name"
+            label _("Player Name")
+            
+            null height 3
+            
+            if player == "":
+                text _("No Name Set") xalign 0.5
+            else:
+                text "[player]" xalign 0.5
+            
+            textbutton _("Change Name") action Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName, launchGame=False)):
+                text_style "navigation_button_text"
+
 
 screen template_preferences():
     hbox:
@@ -1254,63 +1178,28 @@ screen template_preferences():
             
             textbutton _("Change Name") action Show(screen="name_input", message="Please enter your name", ok_action=Function(FinishEnterName, launchGame=False)):
                 text_style "navigation_button_text"
-        
-        python:
-            has_discord_module = True
-            try:
-                RPC
-            except NameError:
-                has_discord_module = False
 
-        if not renpy.android and has_discord_module:
-            vbox:
-                style_prefix "name"
-                label _("Discord RPC")
+        null height (4 * gui.pref_spacing)
 
-                python:
-                    connect_status = _("Disconnected")
-                    if not persistent.enable_discord:
-                        connect_status = _("Disabled")
-                    if RPC.rpc_connected:
-                        connect_status = _("Connected")
-                
-                null height 3
+        hbox:
+            box_wrap True
 
-                text "[connect_status]" xalign 0.5
+            if enable_languages and translations:
+                vbox:
+                    style_prefix "radio"
+                    label _("Language")
+                    hbox:
+                        viewport:
+                            mousewheel True
+                            scrollbars "vertical"
+                            ysize 120
+                            has vbox
 
-                python:
-                    enable_text = _("Enable")
-                    if persistent.enable_discord:
-                        enable_text = _("Disable")
-
-                textbutton enable_text action [ToggleField(persistent, "enable_discord"), 
-                    If(persistent.enable_discord, Function(RPC.close), Function(RPC.connect, reset=True))]:
-                        text_style "navigation_button_text"
-                if persistent.enable_discord and not RPC.rpc_connected:
-                    textbutton _("Reconnect") action Function(RPC.connect, reset=True):
-                        text_style "navigation_button_text"
-
-    null height (4 * gui.pref_spacing)
-
-    hbox:
-        box_wrap True
-
-        if enable_languages and translations:
-            vbox:
-                style_prefix "radio"
-                label _("Language")
-                hbox:
-                    viewport:
-                        mousewheel True
-                        scrollbars "vertical"
-                        ysize 120
-                        has vbox
-
-                        for tran in translations:
-                            vbox:
-                                for tlid, tlname in tran:
-                                    textbutton tlname:
-                                        action Language(tlid)
+                            for tran in translations:
+                                vbox:
+                                    for tlid, tlname in tran:
+                                        textbutton tlname:
+                                            action Language(tlid)
 
 ## Preferences screen ##########################################################
 ##
@@ -1339,8 +1228,8 @@ screen preferences():
                 style_prefix "navigation"
                 xoffset 150
                 spacing 5
-                textbutton _("DDLC Settings") action [SetScreenVariable("ddlc_settings", True), SensitiveIf(not ddlc_settings)]
-                textbutton _("Template Settings") action [SetScreenVariable("ddlc_settings", False), SensitiveIf(ddlc_settings)]
+                #textbutton _("DDLC Settings") action [SetScreenVariable("ddlc_settings", True), SensitiveIf(not ddlc_settings)]
+                #textbutton _("Template Settings") action [SetScreenVariable("ddlc_settings", False), SensitiveIf(ddlc_settings)]
             
             null height 10
 
@@ -1457,41 +1346,60 @@ style value_text:
 
 screen history():
     tag menu
-    
-    ## Avoid predicting this screen, as it can be very large.
     predict False
 
     use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport")):
-        
         style_prefix "history"
-       
         for h in _history_list:
-            
             window:
-                
-                ## This lays things out properly if history_height is None.
                 has fixed:
                     yfit True
-
                 if h.who:
-
                     label h.who:
                         style "history_name"
-                        substitute False
-                        
-                        ## Take the color of the who text from the Character, if
-                        ## set.
                         if "color" in h.who_args:
                             text_color h.who_args["color"]
-
-                $ what = renpy.filter_text_tags(h.what, allow=gui.history_allow_tags)
+                $ what = filter_text_tags(h.what, allow=set([]))
                 text what:
                     substitute False
-
         if not _history_list:
             label _("The dialogue history is empty.")
 
-define gui.history_allow_tags = set()
+python early:
+    import renpy.text.textsupport as textsupport
+    from renpy.text.textsupport import TAG, PARAGRAPH
+    
+    def filter_text_tags(s, allow=None, deny=None):
+        if (allow is None) and (deny is None):
+            raise Exception("Only one of the allow and deny keyword arguments should be given to filter_text_tags.")
+
+        if (allow is not None) and (deny is not None):
+            raise Exception("Only one of the allow and deny keyword arguments should be given to filter_text_tags.")
+
+        tokens = textsupport.tokenize(unicode(s))
+
+        rv = [ ]
+
+        for tokentype, text in tokens:
+
+            if tokentype == PARAGRAPH:
+                rv.append("\n")
+            elif tokentype == TAG:
+                kind = text.partition("=")[0]
+
+                if kind and (kind[0] == "/"):
+                    kind = kind[1:]
+
+                if allow is not None:
+                    if kind in allow:
+                        rv.append("{" + text + "}")
+                else:
+                    if kind not in deny:
+                        rv.append("{" + text + "}")
+            else:
+                rv.append(text.replace("{", "{{"))
+
+        return "".join(rv)
 
 style history_window is empty
 
@@ -1719,8 +1627,7 @@ screen name_input(message, ok_action):
                 style "confirm_prompt"
                 xalign 0.5
 
-            input default "" value VariableInputValue("player") length 12 allow "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-            #additionally added Cyrillic characters to support Russian names for MC
+            input default "" value VariableInputValue("player") length 12 allow "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
             hbox:
                 xalign 0.5

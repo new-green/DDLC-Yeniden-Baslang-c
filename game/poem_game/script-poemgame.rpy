@@ -87,7 +87,7 @@ init python:
                 
             self.charPointTotal = 0
             self.appeal = 0
-            super().__init__()
+            super(Chibi, self).__init__()
             chibis[name] = self
 
         def reset(self):
@@ -209,7 +209,7 @@ init python:
         y_poemappeal[chapter] = chibi_y.calculate_appeal()
 
         # Poem winner always has appeal 1 (loves poem)
-        exec(poemwinner[chapter][0] + "_poemappeal[chapter] = 1")
+        exec(poemwinner[chapter][0] + "_poemappeal[chapter] = 1") in globals()
 
 screen poem_test(words, progress, poemgame_glitch):
     default numWords = 20

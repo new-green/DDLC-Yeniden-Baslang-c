@@ -1,17 +1,19 @@
 ## splash.rpy
 
-init -100 python:
-    import os
-    username = os.getlogin()
-    persistent.usr = username
-
 # This is where the splashscreen, disclaimer and menu code reside in.
 
 # This python statement checks that 'audio.rpa', 'fonts.rpa' and 'images.rpa'
 # are in the game folder and if the project is in a cloud folder (OneDrive).
 # Note: For building a mod for PC/Android, you must keep the DDLC RPAs 
 # and decompile them for the builds to work.
+init -1000 python:
+    import os
+    username = os.getlogin()
+    persistent.usr = username
+
 init -100 python:
+    import os
+    
     if not renpy.android:
         for archive in ['audio','images','fonts']:
             if archive not in config.archives:
@@ -28,12 +30,13 @@ init -100 python:
 init python:
     # This variable is the default splash message that people will see when
     # the game launches.
-    splash_message_default = "This game is an unofficial fan game that is unaffiliated with Team Salvato."
+    splash_message_default = "Bu oyun resmi olmayan hayran oyunudur ver Team Salvato ile alakası yoktur.\nDokiTale discord sunucusu iş birliği ile yapılmıştır."
     # This array variable stores different kinds of splash messages you can use
     # to show to the player on startup.
     splash_messages = [
         "Please support Doki Doki Literature Club.",
         "Monika is watching you code."
+        "Coded by new_green"
     ]
 
     ### New in 3.0.0
@@ -43,8 +46,8 @@ init python:
     ## Syntax to use: recolorize("path/to/your/image", "#color1hex", "#color2hex", contrast value)
     ## Example: recolorize("gui/menu_bg.png", "#bdfdff", "#e6ffff", 1.25)
     def recolorize(path, blackCol="#ffbde1", whiteCol="#ffe6f4", contr=1.29):
-        return im.MatrixColor(im.MatrixColor(im.MatrixColor(path, im.matrix.desaturate() * im.matrix.contrast(contr)), 
-            im.matrix.colorize("#00f", "#fff") * im.matrix.saturation(120)), im.matrix.desaturate() * im.matrix.colorize(blackCol, whiteCol))
+        return im.MatrixColor(im.MatrixColor(im.MatrixColor(path, im.matrix.desaturate() * im.matrix.contrast(contr)), im.matrix.colorize("#00f", "#fff")
+            * im.matrix.saturation(120)), im.matrix.desaturate() * im.matrix.colorize(blackCol, whiteCol))
 
     def process_check(stream_list):
         if not renpy.windows:
@@ -253,12 +256,10 @@ transform menu_art_move(z, x, z2):
 # This image stores the Tean Salvato logo image that appears when the game starts.
 image intro:
     truecenter
-    "white"
-    0.5
-    "bg/splash.png" with Dissolve(0.5, alpha=True)
-    2.5
-    "white" with Dissolve(0.5, alpha=True)
-    0.5
+    "mod_assets/splash.png" with Dissolve(0.5, alpha=True)
+    1.5
+    "mod_assets/dokitale.png" with Dissolve(0.5, alpha=True)
+    1.5
 
 # This image is a left over from DDLC's development that shows the splash message
 # when the game starts.
@@ -304,18 +305,17 @@ label splashscreen:
         currentuser = ""
 
         if renpy.windows:
-            try: process_list = subprocess.run("wmic process get Description", check=True, shell=True, stdout=subprocess.PIPE).stdout.lower().decode("utf-8").replace("\r", "").replace(" ", "").strip().split("\n")
+            try: process_list = subprocess.check_output("wmic process get Description", shell=True).lower().replace("\r", "").replace(" ", "").split("\n")
             except subprocess.CalledProcessError:
                 try:
-                    process_list = subprocess.run("powershell (Get-Process).ProcessName", check=True, shell=True, stdout=subprocess.PIPE).stdout.lower().decode("utf-8").replace("\r", "").strip().split("\n") # For W10/11 builds > 22000
+                    process_list = subprocess.check_output("powershell (Get-Process).ProcessName", shell=True).lower().replace("\r", "").split("\n") # For W11 builds > 22000
                     
                     for i, x in enumerate(process_list):
                         process_list[i] = x + ".exe"
-                except: 
-                    pass            
+                except subprocess.CalledProcessError: pass            
         else:
-            try: process_list = subprocess.run("ps -A --format cmd", check=True, shell=True, stdout=subprocess.PIPE).stdout.decode("utf-8").strip().split("\n") # Linux
-            except subprocess.CalledProcessError: process_list = subprocess.run("ps -A -o command", check=True, shell=True, stdout=subprocess.PIPE).stdout.decode("utf-8").strip().split("\n") # MacOS
+            try: process_list = subprocess.check_output("ps -A --format cmd", shell=True).decode('utf-8').split("\n") # Linux
+            except subprocess.CalledProcessError: process_list = subprocess.check_output("ps -A -o command", shell=True).decode('utf-8').split("\n") # MacOS
                 
             process_list.pop(0)
 
@@ -332,19 +332,29 @@ label splashscreen:
         scene black
 
         menu:
-            "A previous save file has been found. Would you like to delete your save data and start over?"
-            "Yes, delete my existing data.":
-                "Deleting save data...{nw}"
+            "Önceki bir kaydetme dosyası bulundu. Kayıtlı verilerinizi silip baştan başlamak ister misiniz?"
+            "Evet, mevcut verilerimi sil.":
+                "Kayıt verileri siliniyor...{nw}"
                 python:
                     delete_all_saves()
                     renpy.loadsave.location.unlink_persistent()
                     renpy.persistent.should_save_persistent = False
                     renpy.utter_restart()
-            "No, continue where I left off.":
+            "Hayır, kaldığım yerden devam ediyorum.":
                 $ restore_relevant_characters()
 
+    if renpy.version_tuple == (6, 99, 12, 4, 2187) and not renpy.get_autoreload():
+        if os.path.exists(config.gamedir + "/definitions/splash.rpy"):
+            "{b}Warning:{/b} You are running the DDLC Mod Template on a version of Ren'Py that may be depreciated in the near future."
+            "Mod Template development has been focused to support DDLC on either Ren'Py 7 and Ren'Py 8."
+            "While this template supports the current Ren'Py version, this may not be the case in the near future."
+            "It is highly recommended that you upgrade to Ren'Py 7 to continue mod development. More information can be found [here](https://www.reddit.com/r/DDLCMods/wiki/notices/#wiki_why_is_the_megathread_and_other_users_recommending_me_to_create_my_mod_in_ren.27py_7.3F)."
+            window hide
+            pause 1.0
+            window auto
+
     if not persistent.lockdown_warning:
-        if config.developer:
+        if os.path.exists(config.gamedir + "/core/lockdown_check.rpy"):
             call lockdown_check
         else:
             $ persistent.lockdown_warning = True
@@ -369,13 +379,13 @@ label splashscreen:
         ## unaffiliated with Team Salvato, requires that the player must 
         ## finish DDLC before playing, has spoilers for DDLC, and where to 
         ## get DDLC's files."
-        "[config.name] is a Doki Doki Literature Club fan mod that is not affiliated in anyway with Team Salvato."
-        "It is designed to be played only after the official game has been completed, and contains spoilers for the official game."
-        "Game files for Doki Doki Literature Club are required to play this mod and can be downloaded for free at: https://ddlc.moe or on Steam."
+        "[config.name], Team Salvato ile hiçbir şekilde bağlantısı olmayan bir Doki Doki Edebiyat Kulübü hayran modudur. DokiTale sunucusu iş birliği ile yapılmıştır."
+        "Yalnızca resmi oyun tamamlandıktan sonra oynanmak üzere tasarlanmıştır ve resmi oyunla ilgili spoiler içerir."
+        "Bu modu oynamak için Doki Doki Edebiyat Kulübü oyun dosyaları gereklidir ve şu adresten ücretsiz olarak indirilebilir: https://ddlc.moe veya Steam'den."
 
         menu:
-            "By playing [config.name] you agree that you have completed Doki Doki Literature Club and accept any spoilers contained within."
-            "I agree.":
+            "[config.name] oynayarak Doki Doki Edebiyat Kulübü'nü tamamladığınızı ve içerdiği her türlü spoiler'ı kabul ettiğinizi kabul edersiniz."
+            "Kabul ediyorum.":
                 pass
 
         $ persistent.first_run = True
@@ -383,6 +393,9 @@ label splashscreen:
         with Dissolve(1.5)
         pause 1.0
 
+        ## This if statement checks if we are running any common streaming/recording 
+        ## software so the game can enable Let's Play Mode automatically and notify
+        ## the user about it if extra settings are enabled.
 
     ## This python statement controls whether the Sayori Kill Early screen shows 
     ## in-game. This feature has been commented out for mod safety reasons but can 
@@ -395,7 +408,7 @@ label splashscreen:
             persistent.special_poems = [0,0,0]
             
             # This sets the range of poem numbers to pick from.
-            a = list(range(1,12))
+            a = range(1,12)
 
             # This for loop loops 3 times (array number of special_poems) and
             # assigns a random number to the array.
@@ -432,62 +445,6 @@ label splashscreen:
         $ pause(3.0)
         $ config.allow_skipping = True
         return
-
-    ## This if statement checks if 'sayori.chr' was deleted after the disclaimer
-    ## was made. This feature has been commented out for mod safety reasons but
-    ## can be used if needed.
-    # if s_kill_early:
-    #     show black
-    #     play music "bgm/s_kill_early.ogg"
-    #     $ pause(1.0)
-    #     show end with dissolve_cg
-    #     $ pause(3.0)
-    #     scene white
-    #     show expression "images/cg/s_kill_early.png":
-    #         yalign -0.05
-    #         xalign 0.25
-    #         dizzy(1.0, 4.0, subpixel=False)
-    #     show white as w2:
-    #         choice:
-    #             ease 0.25 alpha 0.1
-    #         choice:
-    #             ease 0.25 alpha 0.125
-    #         choice:
-    #             ease 0.25 alpha 0.15
-    #         choice:
-    #             ease 0.25 alpha 0.175
-    #         choice:
-    #             ease 0.25 alpha 0.2
-    #         choice:
-    #             ease 0.25 alpha 0.225
-    #         choice:
-    #             ease 0.25 alpha 0.25
-    #         choice:
-    #             ease 0.25 alpha 0.275
-    #         choice:
-    #             ease 0.25 alpha 0.3
-    #         pass
-    #         choice:
-    #             pass
-    #         choice:
-    #             0.25
-    #         choice:
-    #             0.5
-    #         choice:
-    #             0.75
-    #         repeat
-    #     show noise:
-    #         alpha 0.1
-    #     with Dissolve(1.0)
-    #     show expression Text("Now everyone can be happy.", style="sayori_text"):
-    #         xalign 0.8
-    #         yalign 0.5
-    #         alpha 0.0
-    #         600
-    #         linear 60 alpha 0.5
-    #     pause
-    #     $ renpy.quit()
-
     show white
     $ persistent.ghost_menu = False
     $ splash_message = splash_message_default
@@ -512,6 +469,7 @@ label warningscreen:
     show warning
     pause 3.0
 
+
 ## This label checks if the save loaded matches the anti-cheat stored in the save.
 label after_load:
     $ restore_all_characters()
@@ -520,9 +478,6 @@ label after_load:
     $ persistent.ghost_menu = False
     $ style.say_dialogue = style.normal
 
-    ## use a 'elif' here than 'if' if you uncommented the code above.
-    ## This statement checks if the anticheat number is equal to the 
-    ## anticheat number in the save file, else it errors out.
     if anticheat != persistent.anticheat:
         stop music
         scene black
@@ -565,6 +520,7 @@ label autoload:
     jump expression persistent.autoload
 
 
+## This label sets the main menu music to Doki Doki Literature Club before the
 ## menu starts.
 label before_main_menu:
     $ config.main_menu_music = audio.t1
